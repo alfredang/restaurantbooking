@@ -13,7 +13,9 @@
     initScrollFadeIn();
     initDateConstraint();
     initReservationForm();
+    initLeadForm();
     initThemeToggle();
+    initChatbot();
   });
 
   /* ------------------------ Mobile navigation ----------------------- */
@@ -179,6 +181,167 @@
     }
   }
 
+  /* ------------ Spoken confirmation (Web Speech API) -------------- */
+  // Reusable hook: speaks a short confirmation aloud, if supported.
+  function speakConfirmation(message) {
+    if (!("speechSynthesis" in window)) return;
+    // Stop anything already queued/speaking so we don't overlap.
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(message);
+    utterance.rate = 1.0;
+    utterance.lang = "en-US";
+    window.speechSynthesis.speak(utterance);
+  }
+
+  /* -------------------- Contact / enquiry form -------------------- */
+  function initLeadForm() {
+    const form = document.getElementById("lead-form");
+    if (!form) return;
+
+    const confirmation = document.getElementById("lead-confirmation");
+    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Validation rules per field: returns an error string or "" if valid.
+    const validators = {
+      "lead-name": function (v) {
+        return v.trim().length >= 2 ? "" : "Please enter your full name.";
+      },
+      "lead-email": function (v) {
+        if (!v.trim()) return "Please enter your email address.";
+        return EMAIL_RE.test(v.trim()) ? "" : "Please enter a valid email address.";
+      },
+      "lead-phone": function (v) {
+        // Optional: only validate when something was entered.
+        if (!v.trim()) return "";
+        return /^[\d\s()+-]{7,}$/.test(v.trim())
+          ? ""
+          : "Please enter a valid phone number.";
+      },
+      "lead-interest": function (v) {
+        return v ? "" : "Please select a subject.";
+      },
+      "lead-message": function (v) {
+        return v.trim().length >= 10
+          ? ""
+          : "Please enter a message of at least 10 characters.";
+      },
+    };
+
+    /** Show / clear the inline error for a single field. */
+    function setError(name, message) {
+      const field = form.elements[name];
+      const errorEl = document.getElementById("error-" + name);
+      if (errorEl) errorEl.textContent = message;
+      if (field) {
+        if (message) field.setAttribute("aria-invalid", "true");
+        else field.removeAttribute("aria-invalid");
+      }
+    }
+
+    // Live-clear an error once the user corrects a field.
+    Object.keys(validators).forEach(function (name) {
+      const field = form.elements[name];
+      if (!field) return;
+      field.addEventListener("input", function () {
+        if (field.getAttribute("aria-invalid") === "true") {
+          setError(name, validators[name](field.value));
+        }
+      });
+    });
+
+    // FormSubmit AJAX endpoint — sends enquiries to this inbox.
+    const FORMSUBMIT_ENDPOINT =
+      "https://formsubmit.co/ajax/angch@tertiaryinfotech.com";
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn ? submitBtn.textContent : "";
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      let firstInvalid = null;
+
+      Object.keys(validators).forEach(function (name) {
+        const field = form.elements[name];
+        const message = validators[name](field.value);
+        setError(name, message);
+        if (message && !firstInvalid) firstInvalid = field;
+      });
+
+      if (firstInvalid) {
+        firstInvalid.focus();
+        return;
+      }
+
+      // ---- POST to FormSubmit, then reveal the confirmation panel ----
+      const payload = {
+        name: form.elements["lead-name"].value.trim(),
+        email: form.elements["lead-email"].value.trim(),
+        phone: form.elements["lead-phone"].value.trim(),
+        subject:
+          "Dragon Gate enquiry — " +
+          form.elements["lead-interest"].value,
+        interest: form.elements["lead-interest"].value,
+        message: form.elements["lead-message"].value.trim(),
+        _template: "table",
+        _captcha: "false",
+      };
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Sending…";
+      }
+
+      fetch(FORMSUBMIT_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
+      })
+        .then(function (res) {
+          if (!res.ok) throw new Error("FormSubmit responded " + res.status);
+          return res.json();
+        })
+        .then(function () {
+          form.reset();
+          form.hidden = true;
+          confirmation.hidden = false;
+          confirmation.scrollIntoView({ behavior: "smooth", block: "center" });
+          // Speak an audible confirmation of the successful enquiry.
+          speakConfirmation(
+            "Hurray, thank you for submission. We will get back to you in one business day."
+          );
+        })
+        .catch(function () {
+          setError(
+            "lead-message",
+            "Sorry, we couldn't send your message. Please try again or email reserve@dragongate.sg."
+          );
+        })
+        .finally(function () {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalBtnText;
+          }
+        });
+    });
+
+    // Allow the guest to send another message.
+    const newBtn = document.getElementById("lead-new-message");
+    if (newBtn) {
+      newBtn.addEventListener("click", function () {
+        confirmation.hidden = true;
+        form.hidden = false;
+        Object.keys(validators).forEach(function (name) {
+          setError(name, "");
+        });
+        form.elements["lead-name"].focus();
+      });
+    }
+  }
+
   /* ------------------------- Theme toggle --------------------------- */
   function initThemeToggle() {
     var STORAGE_KEY = "dg-theme";
@@ -238,6 +401,109 @@
         applyTheme(e.matches ? "dark" : "light");
       });
     }
+  }
+
+  /* --------------------------- Chatbot ------------------------------ */
+  /*
+    RAG over FAQ.md via a local FastAPI + ChromaDB backend.
+    Backend: backend/server.py (uvicorn server:app --port 8000)
+    Override the endpoint by setting window.CHATBOT_API_URL before
+    DOMContentLoaded — handy if you reverse-proxy under /api.
+  */
+  function initChatbot() {
+    const API_URL = window.CHATBOT_API_URL || "http://127.0.0.1:8000/query";
+
+    const fab    = document.getElementById("chatbotFab");
+    const panel  = document.getElementById("chatbotPanel");
+    const closeBtn = document.getElementById("chatbotClose");
+    const form   = document.getElementById("chatbotForm");
+    const input  = document.getElementById("chatbotInput");
+    const log    = document.getElementById("chatbotLog");
+    if (!fab || !panel || !form || !input || !log) return;
+
+    function appendMsg(role, text, opts) {
+      const div = document.createElement("div");
+      div.className = "chatbot-msg chatbot-msg--" + role;
+      if (opts && opts.typing) div.classList.add("chatbot-msg--typing");
+      div.textContent = text;
+      log.appendChild(div);
+      log.scrollTop = log.scrollHeight;
+      return div;
+    }
+
+    function greet() {
+      if (log.childElementCount > 0) return;
+      appendMsg(
+        "bot",
+        "Welcome to Dragon Gate. I can answer questions about our menu, " +
+        "hours, location, reservations, and dietary options. What would " +
+        "you like to know?"
+      );
+    }
+
+    function openPanel() {
+      panel.hidden = false;
+      fab.setAttribute("aria-expanded", "true");
+      greet();
+      setTimeout(function () { input.focus(); }, 50);
+    }
+
+    function closePanel() {
+      panel.hidden = true;
+      fab.setAttribute("aria-expanded", "false");
+      fab.focus();
+    }
+
+    fab.addEventListener("click", openPanel);
+    closeBtn.addEventListener("click", closePanel);
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !panel.hidden) closePanel();
+    });
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const q = input.value.trim();
+      if (!q) return;
+      appendMsg("user", q);
+      input.value = "";
+
+      const thinking = appendMsg("bot", "Thinking…", { typing: true });
+
+      fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question: q }),
+      })
+        .then(function (r) {
+          if (!r.ok) throw new Error("HTTP " + r.status);
+          return r.json();
+        })
+        .then(function (data) {
+          thinking.remove();
+          if (data && data.confident && data.answer) {
+            appendMsg(
+              "bot",
+              data.answer + "\n\n— from FAQ: " + data.question
+            );
+          } else {
+            appendMsg(
+              "bot",
+              "I'm not sure I have that in my notes. For specifics, please " +
+              "call +65 6228 8888 or email reserve@dragongate.sg and our " +
+              "maître d' will be happy to help."
+            );
+          }
+        })
+        .catch(function () {
+          thinking.remove();
+          appendMsg(
+            "bot",
+            "Sorry — I can't reach the concierge service right now. Please " +
+            "make sure the backend is running (uvicorn server:app --port 8000) " +
+            "or contact us at reserve@dragongate.sg."
+          );
+        });
+    });
   }
 
   /* ----------------------- Formatting helpers ----------------------- */

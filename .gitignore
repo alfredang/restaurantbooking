@@ -3,6 +3,12 @@
 .env.*
 *.pem
 *.key
+
+# Backend artifacts — regenerable
+backend/chroma_store/
+backend/__pycache__/
+__pycache__/
+*.pyc
 credentials*
 .mcp.json
 .playwright-mcp/

@@ -933,87 +933,207 @@ h1, h2, h3, h4, h5 {
   transform: translateY(0);
 }
 
-/* -------------------- WhatsApp floating action button ------------- */
-/*
-  Tokens:
-  --wa-green      Brand green (#25D366) — used only in the FAB; kept local
-                  so it doesn't pollute the main palette.
-  --wa-green-deep Darker shade for the hover shadow lift.
-  --wa-size       Diameter of the circle.
-  --wa-bottom / --wa-right  Offsets from the viewport edge.
-*/
+/* -------------------- Chatbot floating action button -------------- */
 :root {
-  --wa-green:      #25D366;
-  --wa-green-deep: #128C50;
-  --wa-size:       56px;
-  --wa-bottom:     1.5rem;
-  --wa-right:      1.5rem;
+  --cb-size:    58px;
+  --cb-bottom:  1.5rem;
+  --cb-right:   1.5rem;
 }
 
-.whatsapp-fab {
-  /* Positioning — above the sticky nav (z-index: 100) */
+.chatbot-fab {
   position: fixed;
-  bottom: var(--wa-bottom);
-  right:  var(--wa-right);
+  bottom: var(--cb-bottom);
+  right:  var(--cb-right);
   z-index: 200;
 
-  /* Circle */
-  width:         var(--wa-size);
-  height:        var(--wa-size);
+  width:  var(--cb-size);
+  height: var(--cb-size);
   border-radius: 50%;
+  border: 1px solid var(--gold);
+  padding: 0;
+  cursor: pointer;
 
-  /* Colour & shadow */
-  background:  var(--wa-green);
-  color:       #fff;
-  box-shadow:  0 4px 16px rgba(0, 0, 0, 0.28),
-               0 2px 6px  rgba(37, 211, 102, 0.45);
+  background: linear-gradient(180deg, var(--red) 0%, var(--red-deep) 100%);
+  color: var(--ivory);
+  box-shadow: 0 6px 18px rgba(74, 10, 10, 0.45),
+              0 2px 6px rgba(200, 162, 75, 0.35);
 
-  /* Centre the SVG glyph */
-  display:         flex;
-  align-items:     center;
+  display: flex;
+  align-items: center;
   justify-content: center;
 
-  /* Entrance: subtle pop-in on page load */
-  animation: wa-enter 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-
-  /* Hover / focus transition */
-  transition: transform 0.25s ease,
-              box-shadow 0.25s ease,
-              background 0.25s ease;
+  animation: cb-enter 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
 }
 
-.whatsapp-fab:hover,
-.whatsapp-fab:focus-visible {
-  background:  var(--wa-green-deep);
-  transform:   scale(1.1) translateY(-2px);
-  box-shadow:  0 8px 24px rgba(0, 0, 0, 0.30),
-               0 4px 10px rgba(37, 211, 102, 0.55);
+.chatbot-fab:hover,
+.chatbot-fab:focus-visible {
+  background: linear-gradient(180deg, var(--red-bright) 0%, var(--red) 100%);
+  transform: scale(1.08) translateY(-2px);
+  box-shadow: 0 10px 26px rgba(74, 10, 10, 0.55),
+              0 4px 10px rgba(200, 162, 75, 0.55);
+  outline: none;
 }
 
-/* Explicit keyboard focus ring — visible even when :focus-visible is
-   supported, keeps the ring distinct from the shadow lift. */
-.whatsapp-fab:focus-visible {
-  outline: 3px solid var(--wa-green);
+.chatbot-fab:focus-visible {
+  outline: 3px solid var(--gold-soft);
   outline-offset: 3px;
 }
 
-.whatsapp-fab__icon {
-  width:  28px;
-  height: 28px;
+.chatbot-fab__icon {
+  width: 30px;
+  height: 30px;
   flex-shrink: 0;
 }
 
-/* Pop-in entrance keyframe */
-@keyframes wa-enter {
-  from {
-    opacity:   0;
-    transform: scale(0.6);
-  }
-  to {
-    opacity:   1;
-    transform: scale(1);
-  }
+/* Hide the FAB while the panel is open */
+.chatbot-fab[aria-expanded="true"] {
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
 }
+
+@keyframes cb-enter {
+  from { opacity: 0; transform: scale(0.6); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* -------------------- Chatbot panel ------------------------------- */
+/* [hidden] must beat display:flex below */
+.chatbot-panel[hidden] { display: none !important; }
+
+.chatbot-panel {
+  position: fixed;
+  bottom: var(--cb-bottom);
+  right:  var(--cb-right);
+  z-index: 201;
+
+  width: min(380px, calc(100vw - 2rem));
+  height: min(560px, calc(100vh - 4rem));
+  max-height: 80vh;
+
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-surface);
+  border: 1px solid var(--gold);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  animation: cb-panel-in 0.3s ease both;
+}
+
+@keyframes cb-panel-in {
+  from { opacity: 0; transform: translateY(16px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.chatbot-panel__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1.1rem 1.25rem;
+  background: linear-gradient(180deg, var(--red) 0%, var(--red-deep) 100%);
+  color: var(--ivory);
+  border-bottom: 1px solid var(--gold);
+}
+.chatbot-panel__title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin: 0;
+  color: var(--ivory);
+}
+.chatbot-panel__subtitle {
+  margin: 0.2rem 0 0;
+  font-size: 0.78rem;
+  color: var(--gold-soft);
+  letter-spacing: 0.04em;
+}
+.chatbot-panel__close {
+  background: none;
+  border: none;
+  color: var(--ivory);
+  font-size: 1.7rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 0.3rem;
+  transition: color 0.2s ease;
+}
+.chatbot-panel__close:hover { color: var(--gold-soft); }
+
+.chatbot-panel__log {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  background: var(--bg-page);
+}
+
+.chatbot-msg {
+  max-width: 85%;
+  padding: 0.65rem 0.9rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  border-radius: 10px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.chatbot-msg--bot {
+  align-self: flex-start;
+  background: var(--bg-surface-alt);
+  border: 1px solid var(--border-soft);
+  color: var(--text-primary);
+  border-bottom-left-radius: 2px;
+}
+.chatbot-msg--user {
+  align-self: flex-end;
+  background: var(--red);
+  color: var(--ivory);
+  border-bottom-right-radius: 2px;
+}
+.chatbot-msg--typing {
+  font-style: italic;
+  color: var(--text-muted);
+  opacity: 0.8;
+}
+
+.chatbot-panel__form {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem 0.85rem;
+  border-top: 1px solid var(--border-soft);
+  background: var(--bg-surface);
+}
+.chatbot-panel__input {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-surface-alt);
+  color: var(--text-primary);
+  border-radius: 4px;
+}
+.chatbot-panel__input:focus {
+  outline: none;
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px rgba(158, 27, 27, 0.12);
+}
+.chatbot-panel__send {
+  width: 42px;
+  flex-shrink: 0;
+  border: 1px solid var(--gold);
+  background: var(--red);
+  color: var(--ivory);
+  font-size: 1.1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+.chatbot-panel__send:hover { background: var(--red-deep); }
 
 /* Contact: collapse to single column on narrow viewports */
 @media (max-width: 900px) {
@@ -1090,11 +1210,8 @@ h1, h2, h3, h4, h5 {
 
   /* FAB: skip entrance animation and disable scale/translate on
      hover — the colour change alone communicates interactivity. */
-  .whatsapp-fab {
-    animation: none;
-  }
-  .whatsapp-fab:hover,
-  .whatsapp-fab:focus-visible {
-    transform: none;
-  }
+  .chatbot-fab { animation: none; }
+  .chatbot-fab:hover,
+  .chatbot-fab:focus-visible { transform: none; }
+  .chatbot-panel { animation: none; }
 }
