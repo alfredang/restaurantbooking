@@ -4,7 +4,7 @@ A single-page marketing and reservation website for a fictional Michelin-tier mo
 
 🔗 **Live site:** https://alfredang.github.io/restaurantbooking/
 
-![Dragon Gate screenshot](screenshot.png)
+![Dragon Gate screenshot](screenshot-dragongate.png)
 
 ## Features
 
