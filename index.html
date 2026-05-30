@@ -18,6 +18,22 @@
   />
 
   <link rel="stylesheet" href="styles.css" />
+
+  <!--
+    No-FOUC theme script: runs synchronously before first paint so the
+    correct data-theme attribute is already on <html> when CSS is applied.
+    Reads localStorage key "dg-theme"; falls back to prefers-color-scheme.
+  -->
+  <script>
+    (function () {
+      var saved = localStorage.getItem('dg-theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = saved ? saved : (prefersDark ? 'dark' : 'light');
+      if (theme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
 </head>
 <body>
   <!-- ============================= NAVIGATION ============================= -->
@@ -43,7 +59,20 @@
         <li><a href="#menu">Menu</a></li>
         <li><a href="#testimonials">Testimonials</a></li>
         <li><a href="#reservations">Reservations</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
+
+      <!-- Light / dark theme toggle -->
+      <button
+        class="nav__theme-toggle"
+        id="themeToggle"
+        type="button"
+        aria-pressed="false"
+        aria-label="Switch to dark theme"
+      >
+        <span class="nav__theme-toggle__icon" aria-hidden="true">☀</span>
+        <span class="nav__theme-toggle__label">Theme</span>
+      </button>
     </nav>
   </header>
 
@@ -380,6 +409,164 @@
         </div>
       </div>
     </section>
+
+    <!-- ============================= CONTACT ============================= -->
+    <section id="contact" class="section contact fade-in">
+      <div class="section__head">
+        <p class="eyebrow">联络我们 · Get in Touch</p>
+        <h2 class="section__title">Contact Us</h2>
+        <p class="section__intro">
+          Have a question about private dining, corporate events, or a special
+          celebration? Send us a message and our team will respond within the day.
+        </p>
+      </div>
+
+      <div class="contact__body">
+
+        <!-- ---- Lead-capture form ---- -->
+        <div class="contact__form-col">
+          <div class="reservations__panel">
+            <form id="lead-form" class="form" novalidate>
+
+              <div class="form__row">
+                <div class="form__field">
+                  <label for="lead-name">Full Name <span class="req">*</span></label>
+                  <input
+                    type="text"
+                    id="lead-name"
+                    name="lead-name"
+                    autocomplete="name"
+                    required
+                  />
+                  <span class="form__error" id="error-lead-name" role="alert"></span>
+                </div>
+
+                <div class="form__field">
+                  <label for="lead-email">Email <span class="req">*</span></label>
+                  <input
+                    type="email"
+                    id="lead-email"
+                    name="lead-email"
+                    autocomplete="email"
+                    required
+                  />
+                  <span class="form__error" id="error-lead-email" role="alert"></span>
+                </div>
+              </div>
+
+              <div class="form__row">
+                <div class="form__field">
+                  <label for="lead-phone">Phone <span class="optional">(optional)</span></label>
+                  <input
+                    type="tel"
+                    id="lead-phone"
+                    name="lead-phone"
+                    autocomplete="tel"
+                  />
+                  <span class="form__error" id="error-lead-phone" role="alert"></span>
+                </div>
+
+                <div class="form__field">
+                  <label for="lead-interest">Subject <span class="req">*</span></label>
+                  <select id="lead-interest" name="lead-interest" required>
+                    <option value="">Select a subject</option>
+                    <option value="private-dining">Private Dining &amp; Events</option>
+                    <option value="corporate">Corporate Hospitality</option>
+                    <option value="wedding">Wedding &amp; Celebration</option>
+                    <option value="media">Media &amp; Press</option>
+                    <option value="other">General Enquiry</option>
+                  </select>
+                  <span class="form__error" id="error-lead-interest" role="alert"></span>
+                </div>
+              </div>
+
+              <div class="form__field">
+                <label for="lead-message">Message <span class="req">*</span></label>
+                <textarea
+                  id="lead-message"
+                  name="lead-message"
+                  rows="5"
+                  placeholder="Tell us how we can help…"
+                  required
+                ></textarea>
+                <span class="form__error" id="error-lead-message" role="alert"></span>
+              </div>
+
+              <button type="submit" class="btn btn--red btn--full">Send Message</button>
+            </form>
+
+            <!-- Success confirmation (revealed by script.js) -->
+            <div class="confirmation" id="lead-confirmation" hidden role="status" aria-live="polite">
+              <div class="confirmation__mark" aria-hidden="true">谢</div>
+              <h3 class="confirmation__title">Message Received</h3>
+              <p class="confirmation__text">
+                Thank you for reaching out. A member of our team will be in touch
+                within one business day.
+              </p>
+              <button type="button" class="btn btn--outline" id="lead-new-message">
+                Send Another Message
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ---- Map + address ---- -->
+        <div class="contact__map-col">
+          <!--
+            PLACEHOLDER MAP EMBED — replace the src URL with your real embed URL.
+            Steps to get a real embed URL:
+              1. Go to maps.google.com and search for your address.
+              2. Click Share → Embed a map → Copy HTML.
+              3. Replace the src="…" value below with the copied URL.
+            The current coordinates point to the Bukit Pasoh Road area, Singapore.
+          -->
+          <div class="contact__map">
+            <iframe
+              title="Dragon Gate · 龙门 location on Google Maps"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8197315496!2d103.84068!3d1.2799!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da19a6e99ba5d1%3A0x7ddbc3f2d1e81551!2s8%20Bukit%20Pasoh%20Rd%2C%20Singapore%20089814!5e0!3m2!1sen!2ssg!4v1700000000000!5m2!1sen!2ssg"
+              width="100%"
+              height="100%"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+
+          <address class="contact__info">
+            <div class="contact__info-row">
+              <span class="contact__info-label">Address</span>
+              <span class="contact__info-value">
+                8 Bukit Pasoh Road<br />
+                Singapore 089814
+              </span>
+            </div>
+            <div class="contact__info-row">
+              <span class="contact__info-label">Phone</span>
+              <span class="contact__info-value">
+                <a href="tel:+6562288888">+65 6228 8888</a>
+              </span>
+            </div>
+            <div class="contact__info-row">
+              <span class="contact__info-label">Email</span>
+              <span class="contact__info-value">
+                <a href="mailto:reserve@dragongate.sg">reserve@dragongate.sg</a>
+              </span>
+            </div>
+            <div class="contact__info-row">
+              <span class="contact__info-label">Hours</span>
+              <span class="contact__info-value">
+                Tuesday – Sunday<br />
+                Lunch &nbsp;11:30 – 14:30<br />
+                Dinner 18:00 – 22:30<br />
+                <em>Closed Mondays</em>
+              </span>
+            </div>
+          </address>
+        </div>
+
+      </div>
+    </section>
   </main>
 
   <!-- ============================= FOOTER ============================= -->
@@ -421,5 +608,38 @@
   </footer>
 
   <script src="script.js"></script>
+
+  <!--
+    WhatsApp floating action button.
+    PHONE NUMBER: Replace "6562288888" below with the restaurant's WhatsApp
+    Business number in international format — no +, spaces, or dashes.
+    Example: Singapore +65 6228 8888 → 6562288888
+    PREFILLED MESSAGE: Edit the `text=` query-string value as needed
+    (percent-encode spaces as %20 and commas as %2C).
+  -->
+  <a
+    class="whatsapp-fab"
+    href="https://wa.me/6596983731?text=Hi%20Dragon%20Gate%2C%20I%27d%20like%20to%20make%20a%20reservation."
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Chat with Dragon Gate on WhatsApp"
+  >
+    <svg
+      class="whatsapp-fab__icon"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <!--
+        WhatsApp glyph — simplified path tracing the speech-bubble + handset
+        shape used in the official WhatsApp logo (no trademark claimed).
+      -->
+      <path
+        fill="currentColor"
+        d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.978-1.417A9.956 9.956 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2Zm0 18a7.942 7.942 0 0 1-4.054-1.107l-.29-.173-3.01.857.875-2.938-.19-.302A7.944 7.944 0 0 1 4 12c0-4.418 3.582-8 8-8s8 3.582 8 8-3.582 8-8 8Zm4.406-5.946c-.242-.121-1.432-.707-1.655-.787-.222-.08-.383-.121-.545.121-.161.242-.627.787-.768.949-.14.161-.282.182-.524.06-.242-.121-1.022-.376-1.947-1.2-.72-.642-1.206-1.435-1.348-1.677-.14-.242-.015-.373.106-.493.109-.108.242-.282.363-.423.12-.14.161-.242.242-.403.08-.161.04-.303-.02-.423-.061-.121-.545-1.314-.747-1.799-.197-.472-.397-.408-.545-.416l-.464-.008a.893.893 0 0 0-.645.303c-.222.242-.847.828-.847 2.02s.867 2.343.988 2.505c.12.161 1.707 2.607 4.137 3.654.578.25 1.029.398 1.38.51.58.184 1.108.158 1.525.096.465-.069 1.432-.586 1.634-1.151.201-.565.201-1.049.14-1.151-.06-.1-.222-.161-.464-.282Z"
+      />
+    </svg>
+  </a>
 </body>
 </html>

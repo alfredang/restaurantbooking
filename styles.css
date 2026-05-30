@@ -1,4 +1,4 @@
-/* =====================================================================
+﻿/* =====================================================================
    Dragon Gate · 龙门 — Stylesheet
    Palette: lacquer red + gold + warm ivory, grounded in deep ink
    Fonts:   Cormorant Garamond (display) / Noto Serif SC (Hanzi) / Inter (body)
@@ -6,20 +6,35 @@
 
 /* ----------------------------- Tokens ----------------------------- */
 :root {
+  /* ---- Brand palette (theme-invariant) ---- */
   --red:        #9E1B1B;  /* primary — imperial / lacquer red          */
   --red-deep:   #6E0F0F;  /* hovers, depth, gradients                  */
   --red-bright: #C8102E;  /* accents, active states                    */
   --red-ink:    #4A0A0A;  /* near-black red for atmospheric sections   */
   --gold:       #C8A24B;  /* premium accent — borders, headings        */
   --gold-soft:  #E6C77A;  /* hover gold                                */
-  --ink:        #1A1413;  /* warm near-black for body text & sections  */
-  --ivory:      #FBF7F0;  /* warm off-white background                 */
-  --ivory-dim:  #C9BFAE;  /* muted on dark                             */
-  --paper:      #F1E9D8;  /* aged paper accent                         */
   --jade:       #2E6E5E;  /* sparing contrast accent                   */
 
-  --line:       rgba(200, 162, 75, 0.32); /* thin gold rule on dark    */
-  --line-dark:  rgba(26, 20, 19, 0.18);   /* thin ink rule on ivory    */
+  /* ---- Semantic surface tokens (light theme default) ---- */
+  --bg-page:        #FBF7F0;  /* page background — warm ivory           */
+  --bg-surface:     #FBF7F0;  /* card / panel surfaces                  */
+  --bg-surface-alt: #FFFFFF;  /* form inputs, lifted surfaces           */
+  --text-primary:   #1A1413;  /* body copy, headings                    */
+  --text-muted:     rgba(26, 20, 19, 0.70);  /* secondary text         */
+  --text-faint:     rgba(26, 20, 19, 0.40);  /* placeholders           */
+  --border-soft:    rgba(26, 20, 19, 0.18);  /* subtle borders         */
+  --border-faint:   rgba(26, 20, 19, 0.08);  /* barely-there dividers  */
+  --nav-bg:         rgba(251, 247, 240, 0.88); /* nav backdrop          */
+  --nav-mobile-bg:  rgba(251, 247, 240, 0.98); /* mobile drawer         */
+
+  /* Legacy aliases kept so older component rules still resolve */
+  --ink:        #1A1413;
+  --ivory:      #FBF7F0;
+  --ivory-dim:  #C9BFAE;
+  --paper:      #F1E9D8;
+
+  --line:       rgba(200, 162, 75, 0.32);
+  --line-dark:  rgba(26, 20, 19, 0.18);
   --shadow:     0 24px 60px rgba(74, 10, 10, 0.28);
   --shadow-soft: 0 12px 30px rgba(26, 20, 19, 0.12);
 
@@ -29,6 +44,46 @@
 
   --maxw:  1200px;
   --nav-h: 80px;
+}
+
+/* ---- Dark theme overrides ---- */
+:root[data-theme="dark"] {
+  --bg-page:        #1C1410;  /* very deep warm-black                   */
+  --bg-surface:     #261C18;  /* card / panel surfaces                  */
+  --bg-surface-alt: #2F211C;  /* form inputs                            */
+  --text-primary:   #EDE5D8;  /* warm off-white — high contrast on dark */
+  --text-muted:     rgba(237, 229, 216, 0.70);
+  --text-faint:     rgba(237, 229, 216, 0.38);
+  --border-soft:    rgba(200, 162, 75, 0.22);  /* gold-tinted borders   */
+  --border-faint:   rgba(200, 162, 75, 0.10);
+  --nav-bg:         rgba(28, 20, 16, 0.92);
+  --nav-mobile-bg:  rgba(28, 20, 16, 0.98);
+
+  /* Remap legacy aliases so any rule using them adapts automatically */
+  --ink:       #EDE5D8;
+  --ivory:     #EDE5D8;
+  --ivory-dim: #A89880;
+  --paper:     #D4C4A8;
+
+  --line:       rgba(200, 162, 75, 0.35);
+  --line-dark:  rgba(200, 162, 75, 0.20);
+  --shadow:     0 24px 60px rgba(0, 0, 0, 0.55);
+  --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* ---- Smooth theme transitions (skipped when reduced-motion is on) ---- */
+html {
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+body,
+.site-header,
+.dish,
+.reservations__panel,
+.nav__theme-toggle {
+  transition: background-color 0.35s ease,
+              color 0.35s ease,
+              border-color 0.35s ease,
+              box-shadow 0.35s ease;
 }
 
 /* ----------------------------- Reset ------------------------------ */
@@ -45,12 +100,12 @@ body {
   margin: 0;
   font-family: var(--font-body);
   font-weight: 400;
-  color: var(--ink);
-  background: var(--ivory);
+  color: var(--text-primary);
+  background: var(--bg-page);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 
-  /* Subtle warm paper texture on the ivory background — gives weight
+  /* Subtle warm paper texture on the background — gives weight
      without printing-out gradients. */
   background-image:
     radial-gradient(ellipse at 10% 0%, rgba(200, 162, 75, 0.07) 0%, transparent 55%),
@@ -146,7 +201,7 @@ h1, h2, h3, h4, h5 {
   font-size: clamp(2.4rem, 5.4vw, 3.4rem);
   font-weight: 500;
   font-style: italic;
-  color: var(--ink);
+  color: var(--text-primary);
   letter-spacing: -0.005em;
 }
 .section__title::after {
@@ -171,7 +226,7 @@ h1, h2, h3, h4, h5 {
   text-align: center;
 }
 .section__intro {
-  color: rgba(26, 20, 19, 0.72);
+  color: var(--text-muted);
   font-size: 1.04rem;
   margin-top: 1.4rem;
   line-height: 1.8;
@@ -182,10 +237,10 @@ h1, h2, h3, h4, h5 {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(251, 247, 240, 0.88);
+  background: var(--nav-bg);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--line-dark);
+  border-bottom: 1px solid var(--border-soft);
 }
 .nav {
   max-width: var(--maxw);
@@ -203,7 +258,7 @@ h1, h2, h3, h4, h5 {
   font-family: var(--font-display);
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--ink);
+  color: var(--text-primary);
   letter-spacing: 0.02em;
 }
 .nav__brand-cn {
@@ -225,7 +280,7 @@ h1, h2, h3, h4, h5 {
   font-size: 0.74rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--ink);
+  color: var(--text-primary);
   position: relative;
   padding-bottom: 5px;
   transition: color 0.25s ease;
@@ -258,7 +313,7 @@ h1, h2, h3, h4, h5 {
   display: block;
   height: 2px;
   width: 100%;
-  background: var(--ink);
+  background: var(--text-primary);
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 .nav__toggle[aria-expanded="true"] span:nth-child(1) {
@@ -267,6 +322,46 @@ h1, h2, h3, h4, h5 {
 .nav__toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
 .nav__toggle[aria-expanded="true"] span:nth-child(3) {
   transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ---- Theme toggle ---- */
+.nav__theme-toggle {
+  background: none;
+  border: 1px solid var(--border-soft);
+  border-radius: 2px;
+  padding: 0.3rem 0.55rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  transition: border-color 0.25s ease, color 0.25s ease,
+              background-color 0.25s ease;
+  /* Ensure it doesn't collapse on mobile */
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nav__theme-toggle:hover,
+.nav__theme-toggle:focus-visible {
+  border-color: var(--gold);
+  color: var(--red);
+  outline: none;
+}
+.nav__theme-toggle:focus-visible {
+  box-shadow: 0 0 0 3px rgba(200, 162, 75, 0.35);
+}
+.nav__theme-toggle__icon {
+  font-size: 0.9rem;
+  line-height: 1;
+  /* Don't let the icon shift layout on swap */
+  display: inline-block;
+  width: 1em;
+  text-align: center;
 }
 
 /* ------------------------------ Hero ------------------------------ */
@@ -364,7 +459,7 @@ h1, h2, h3, h4, h5 {
   font-style: italic;
   font-weight: 500;
   text-align: center;
-  color: var(--ink);
+  color: var(--text-primary);
   margin-bottom: 2.6rem;
   display: flex;
   flex-direction: column;
@@ -395,8 +490,8 @@ h1, h2, h3, h4, h5 {
 }
 
 .dish {
-  background: var(--ivory);
-  border: 1px solid var(--line-dark);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-soft);
   overflow: hidden;
   transition: transform 0.5s cubic-bezier(.2,.7,.2,1),
               box-shadow 0.5s ease,
@@ -445,14 +540,14 @@ h1, h2, h3, h4, h5 {
   gap: 1rem;
   margin-bottom: 0.6rem;
   padding-bottom: 0.7rem;
-  border-bottom: 1px dotted rgba(26, 20, 19, 0.18);
+  border-bottom: 1px dotted var(--border-soft);
 }
 .dish__name {
   font-family: var(--font-display);
   font-size: 1.3rem;
   font-style: italic;
   font-weight: 500;
-  color: var(--ink);
+  color: var(--text-primary);
 }
 .dish__price {
   font-family: var(--font-body);
@@ -465,7 +560,7 @@ h1, h2, h3, h4, h5 {
 .dish__desc {
   margin: 0;
   font-size: 0.92rem;
-  color: rgba(26, 20, 19, 0.7);
+  color: var(--text-muted);
   line-height: 1.65;
 }
 
@@ -562,7 +657,7 @@ h1, h2, h3, h4, h5 {
 .reservations__panel {
   max-width: 780px;
   margin: 0 auto;
-  background: var(--ivory);
+  background: var(--bg-surface);
   border: 1px solid var(--gold);
   padding: 3rem clamp(1.5rem, 4vw, 3.2rem);
   box-shadow: var(--shadow-soft);
@@ -592,13 +687,13 @@ h1, h2, h3, h4, h5 {
   font-size: 0.7rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--ink);
+  color: var(--text-primary);
   margin-bottom: 0.6rem;
   font-weight: 500;
 }
 .req { color: var(--red); }
 .optional {
-  color: rgba(26, 20, 19, 0.5);
+  color: var(--text-muted);
   text-transform: none;
   letter-spacing: normal;
   font-weight: 400;
@@ -609,16 +704,17 @@ h1, h2, h3, h4, h5 {
 .form textarea {
   font-family: var(--font-body);
   font-size: 0.95rem;
-  color: var(--ink);
-  background: #fff;
-  border: 1px solid rgba(26, 20, 19, 0.18);
+  color: var(--text-primary);
+  background: var(--bg-surface-alt);
+  border: 1px solid var(--border-soft);
   padding: 0.9rem 1rem;
   width: 100%;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease,
+              background-color 0.35s ease, color 0.35s ease;
 }
 .form textarea { resize: vertical; }
 .form input::placeholder,
-.form textarea::placeholder { color: rgba(26, 20, 19, 0.4); }
+.form textarea::placeholder { color: var(--text-faint); }
 
 .form input:focus,
 .form select:focus,
@@ -667,11 +763,94 @@ h1, h2, h3, h4, h5 {
   margin-bottom: 1rem;
 }
 .confirmation__text {
-  color: rgba(26, 20, 19, 0.72);
+  color: var(--text-muted);
   max-width: 500px;
   margin: 0 auto 2rem;
 }
 
+/* ------------------------------ Contact ---------------------------- */
+
+/*
+  Two-column layout: lead-capture form (left) + map + address (right).
+  Collapses to a single column below 900 px.
+*/
+.contact__body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* Map wrapper — aspect-ratio box so the iframe is always responsive */
+.contact__map {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 4px;
+  border: 1px solid var(--gold);
+  box-shadow: var(--shadow-soft);
+  position: relative;
+}
+
+.contact__map iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+/* Address / info block sits flush beneath the map, sharing a border */
+.contact__info {
+  font-style: normal;
+  border: 1px solid var(--gold);
+  border-top: none;
+  background: var(--ivory);
+  padding: 1.6rem 1.8rem;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact__info-row {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 0.75rem;
+  font-size: 0.92rem;
+  line-height: 1.75;
+  align-items: start;
+}
+
+.contact__info-label {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--red);
+  padding-top: 0.18rem;
+}
+
+.contact__info-value {
+  color: var(--ink);
+}
+
+.contact__info-value a {
+  color: var(--ink);
+  transition: color 0.25s ease;
+}
+
+.contact__info-value a:hover {
+  color: var(--red);
+}
+
+.contact__info-value em {
+  font-style: normal;
+  color: rgba(26, 20, 19, 0.55);
+  font-size: 0.88rem;
+}
 /* ------------------------------ Footer ----------------------------- */
 .footer {
   background: var(--ink);
@@ -754,9 +933,110 @@ h1, h2, h3, h4, h5 {
   transform: translateY(0);
 }
 
+/* -------------------- WhatsApp floating action button ------------- */
+/*
+  Tokens:
+  --wa-green      Brand green (#25D366) — used only in the FAB; kept local
+                  so it doesn't pollute the main palette.
+  --wa-green-deep Darker shade for the hover shadow lift.
+  --wa-size       Diameter of the circle.
+  --wa-bottom / --wa-right  Offsets from the viewport edge.
+*/
+:root {
+  --wa-green:      #25D366;
+  --wa-green-deep: #128C50;
+  --wa-size:       56px;
+  --wa-bottom:     1.5rem;
+  --wa-right:      1.5rem;
+}
+
+.whatsapp-fab {
+  /* Positioning — above the sticky nav (z-index: 100) */
+  position: fixed;
+  bottom: var(--wa-bottom);
+  right:  var(--wa-right);
+  z-index: 200;
+
+  /* Circle */
+  width:         var(--wa-size);
+  height:        var(--wa-size);
+  border-radius: 50%;
+
+  /* Colour & shadow */
+  background:  var(--wa-green);
+  color:       #fff;
+  box-shadow:  0 4px 16px rgba(0, 0, 0, 0.28),
+               0 2px 6px  rgba(37, 211, 102, 0.45);
+
+  /* Centre the SVG glyph */
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+
+  /* Entrance: subtle pop-in on page load */
+  animation: wa-enter 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+
+  /* Hover / focus transition */
+  transition: transform 0.25s ease,
+              box-shadow 0.25s ease,
+              background 0.25s ease;
+}
+
+.whatsapp-fab:hover,
+.whatsapp-fab:focus-visible {
+  background:  var(--wa-green-deep);
+  transform:   scale(1.1) translateY(-2px);
+  box-shadow:  0 8px 24px rgba(0, 0, 0, 0.30),
+               0 4px 10px rgba(37, 211, 102, 0.55);
+}
+
+/* Explicit keyboard focus ring — visible even when :focus-visible is
+   supported, keeps the ring distinct from the shadow lift. */
+.whatsapp-fab:focus-visible {
+  outline: 3px solid var(--wa-green);
+  outline-offset: 3px;
+}
+
+.whatsapp-fab__icon {
+  width:  28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+/* Pop-in entrance keyframe */
+@keyframes wa-enter {
+  from {
+    opacity:   0;
+    transform: scale(0.6);
+  }
+  to {
+    opacity:   1;
+    transform: scale(1);
+  }
+}
+
+/* Contact: collapse to single column on narrow viewports */
+@media (max-width: 900px) {
+  .contact__body {
+    grid-template-columns: 1fr;
+  }
+}
 /* ----------------------------- Responsive ------------------------- */
 @media (max-width: 760px) {
   .nav__toggle { display: flex; }
+
+  /* On mobile the ul is position:absolute so brand + the two icon
+     buttons remain in the flex row. Group them at the right edge. */
+  .nav {
+    gap: 0.75rem;
+  }
+  .nav__brand {
+    margin-right: auto; /* push buttons to the right */
+  }
+  /* Hide the "Theme" text label — icon alone is sufficient on mobile */
+  .nav__theme-toggle__label {
+    display: none;
+  }
 
   .nav__links {
     position: absolute;
@@ -765,19 +1045,19 @@ h1, h2, h3, h4, h5 {
     right: 0;
     flex-direction: column;
     gap: 0;
-    background: rgba(251, 247, 240, 0.98);
+    background: var(--nav-mobile-bg);
     backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--line-dark);
+    border-bottom: 1px solid var(--border-soft);
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.35s ease;
   }
-  .nav__links.open { max-height: 320px; }
+  .nav__links.open { max-height: 380px; }
   .nav__links li { width: 100%; text-align: center; }
   .nav__links a {
     display: block;
     padding: 1rem 0;
-    border-top: 1px solid rgba(26, 20, 19, 0.08);
+    border-top: 1px solid var(--border-faint);
   }
   .nav__links a::after { display: none; }
 
@@ -797,4 +1077,24 @@ h1, h2, h3, h4, h5 {
     transition-duration: 0.001ms !important;
   }
   .fade-in { opacity: 1; transform: none; }
+
+  /* Theme transition: kill the smooth colour cross-fade */
+  html,
+  body,
+  .site-header,
+  .dish,
+  .reservations__panel,
+  .nav__theme-toggle {
+    transition: none !important;
+  }
+
+  /* FAB: skip entrance animation and disable scale/translate on
+     hover — the colour change alone communicates interactivity. */
+  .whatsapp-fab {
+    animation: none;
+  }
+  .whatsapp-fab:hover,
+  .whatsapp-fab:focus-visible {
+    transform: none;
+  }
 }

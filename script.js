@@ -13,6 +13,7 @@
     initScrollFadeIn();
     initDateConstraint();
     initReservationForm();
+    initThemeToggle();
   });
 
   /* ------------------------ Mobile navigation ----------------------- */
@@ -174,6 +175,67 @@
         form.hidden = false;
         initDateConstraint(); // reset the min date
         form.elements.name.focus();
+      });
+    }
+  }
+
+  /* ------------------------- Theme toggle --------------------------- */
+  function initThemeToggle() {
+    var STORAGE_KEY = "dg-theme";
+    var btn = document.getElementById("themeToggle");
+    if (!btn) return;
+
+    /** Return the currently active theme from the html attribute. */
+    function activeTheme() {
+      return document.documentElement.getAttribute("data-theme") === "dark"
+        ? "dark"
+        : "light";
+    }
+
+    /** Apply a theme and update the button's aria state + icon/label. */
+    function applyTheme(theme) {
+      if (theme === "dark") {
+        document.documentElement.setAttribute("data-theme", "dark");
+      } else {
+        document.documentElement.removeAttribute("data-theme");
+      }
+      var isDark = theme === "dark";
+      btn.setAttribute("aria-pressed", String(isDark));
+      btn.setAttribute(
+        "aria-label",
+        isDark ? "Switch to light theme" : "Switch to dark theme"
+      );
+      var icon = btn.querySelector(".nav__theme-toggle__icon");
+      if (icon) {
+        // Sun = light mode active (click to go dark); Moon = dark mode active
+        icon.textContent = isDark ? "☽" : "☀"; // ☽ / ☀
+      }
+    }
+
+    // Initialise: the no-FOUC script may have already set data-theme;
+    // read that state rather than re-computing so we stay consistent.
+    applyTheme(activeTheme());
+
+    // Toggle on click, persist to localStorage.
+    btn.addEventListener("click", function () {
+      var next = activeTheme() === "dark" ? "light" : "dark";
+      applyTheme(next);
+      try {
+        localStorage.setItem(STORAGE_KEY, next);
+      } catch (e) {
+        // Private browsing may deny writes — silently ignore.
+      }
+    });
+
+    // React to OS-level preference changes only when the user has NOT
+    // made an explicit choice (no saved preference).
+    var mq = window.matchMedia("(prefers-color-scheme: dark)");
+    if (mq && typeof mq.addEventListener === "function") {
+      mq.addEventListener("change", function (e) {
+        try {
+          if (localStorage.getItem(STORAGE_KEY)) return; // user chose explicitly
+        } catch (err) { /* ignore */ }
+        applyTheme(e.matches ? "dark" : "light");
       });
     }
   }
