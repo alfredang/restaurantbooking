@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Maison Lumière — Authentic French Cuisine</title>
+  <title>Dragon Gate · 龙门 — Modern Cantonese Fine Dining</title>
   <meta
     name="description"
-    content="Maison Lumière — an upscale French restaurant offering authentic Parisian cuisine. Reserve your table today."
+    content="Dragon Gate · 龙门 — a Michelin-tier modern Cantonese restaurant. Imperial heritage, seasonal craft, and an unforgettable tasting experience. Reserve your table."
   />
 
-  <!-- Google Fonts: Playfair Display (serif headings) + Montserrat (sans body) -->
+  <!-- Google Fonts: Cormorant Garamond (display serif) + Noto Serif SC (Hanzi) + Inter (body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   />
 
@@ -24,7 +24,8 @@
   <header class="site-header" id="top">
     <nav class="nav" aria-label="Primary">
       <a class="nav__brand" href="#top">
-        Maison&nbsp;Lumière
+        <span class="nav__brand-en">Dragon&nbsp;Gate</span>
+        <span class="nav__brand-cn" aria-hidden="true">龙门</span>
       </a>
 
       <!-- Mobile menu toggle -->
@@ -51,12 +52,15 @@
     <section id="hero" class="hero" aria-label="Welcome">
       <div class="hero__overlay"></div>
       <div class="hero__content">
-        <p class="eyebrow eyebrow--light">Est. 1908 · Paris</p>
-        <h1 class="hero__title">Maison Lumière</h1>
+        <p class="eyebrow eyebrow--light">Est. 1932 · A Cantonese House</p>
+        <h1 class="hero__title">
+          <span class="hero__title-cn" aria-hidden="true">龙门</span>
+          <span class="hero__title-en">Dragon Gate</span>
+        </h1>
         <p class="hero__tagline">
-          Authentic French cuisine in the heart of the city.
+          Imperial Cantonese craft, reimagined for the modern table.
         </p>
-        <a href="#reservations" class="btn btn--gold">Reserve a Table</a>
+        <a href="#reservations" class="btn btn--red">Reserve a Table</a>
       </div>
       <a href="#menu" class="hero__scroll" aria-label="Scroll to menu">&#8595;</a>
     </section>
@@ -64,123 +68,130 @@
     <!-- ============================= MENU ============================= -->
     <section id="menu" class="section menu fade-in">
       <div class="section__head">
-        <p class="eyebrow">La Carte</p>
-        <h2 class="section__title">Our Menu</h2>
+        <p class="eyebrow">菜单 · The Menu</p>
+        <h2 class="section__title">Seasonal Tasting</h2>
         <p class="section__intro">
-          A seasonal celebration of classic French gastronomy, crafted each
-          morning from the market's finest produce.
+          A quiet conversation between heritage and season — wok-fired,
+          double-steamed, slow-roasted. Sourced each dawn from the harbour and
+          the highlands.
         </p>
       </div>
 
-      <!-- Entrées -->
+      <!-- Dim Sum -->
       <div class="menu__category">
-        <h3 class="menu__category-title">Entrées</h3>
+        <h3 class="menu__category-title">
+          <span class="menu__cn" aria-hidden="true">点心</span>
+          <span>Dim Sum</span>
+        </h3>
         <div class="menu__grid">
           <article class="dish">
             <div class="dish__media">
               <img
-                src="https://images.unsplash.com/photo-1585684278140-f6b0e42a9bc0?w=800&q=80&auto=format&fit=crop"
-                alt="Escargots de Bourgogne served in their shells with herb butter"
+                src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=800&q=80&auto=format&fit=crop"
+                alt="Steamed xiao long bao soup dumplings in a bamboo basket"
                 loading="lazy"
               />
             </div>
             <div class="dish__body">
               <div class="dish__heading">
-                <h4 class="dish__name">Escargots de Bourgogne</h4>
-                <span class="dish__price">S$28</span>
+                <h4 class="dish__name">Xiao Long Bao · 小笼包</h4>
+                <span class="dish__price">S$22</span>
               </div>
-              <p class="dish__desc">Burgundy snails baked in garlic-parsley butter.</p>
+              <p class="dish__desc">Shanghainese soup dumplings, aged Zhenjiang vinegar, ginger silk.</p>
             </div>
           </article>
 
           <article class="dish">
             <div class="dish__media">
               <img
-                src="https://images.unsplash.com/photo-1694345598676-218d3202f8d3?w=800&q=80&auto=format&fit=crop"
-                alt="A bowl of French onion soup topped with melted gruyère"
+                src="https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=800&q=80&auto=format&fit=crop"
+                alt="Assorted Cantonese dim sum on bamboo steamer trays"
                 loading="lazy"
               />
             </div>
             <div class="dish__body">
               <div class="dish__heading">
-                <h4 class="dish__name">Soupe à l'Oignon</h4>
+                <h4 class="dish__name">Har Gow · 虾饺</h4>
                 <span class="dish__price">S$24</span>
               </div>
-              <p class="dish__desc">Caramelised onion soup, gruyère, toasted baguette.</p>
+              <p class="dish__desc">Crystal-skin prawn dumplings, bamboo shoot, sesame oil.</p>
             </div>
           </article>
 
           <article class="dish">
             <div class="dish__media">
               <img
-                src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80&auto=format&fit=crop"
-                alt="A fresh Niçoise salad with greens, tomatoes and olives"
+                src="https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=800&q=80&auto=format&fit=crop"
+                alt="Hand-folded steamed bao buns on a bamboo tray"
                 loading="lazy"
               />
             </div>
             <div class="dish__body">
               <div class="dish__heading">
-                <h4 class="dish__name">Salade Niçoise</h4>
-                <span class="dish__price">S$26</span>
+                <h4 class="dish__name">Char Siu Bao · 叉烧包</h4>
+                <span class="dish__price">S$20</span>
               </div>
-              <p class="dish__desc">Seared tuna, haricots verts, egg, olives, anchovy.</p>
+              <p class="dish__desc">Pillow-soft bao, lacquered honey-glazed Iberico char siu.</p>
             </div>
           </article>
         </div>
       </div>
 
-      <!-- Plats Principaux -->
+      <!-- Main Courses -->
       <div class="menu__category">
-        <h3 class="menu__category-title">Plats Principaux</h3>
+        <h3 class="menu__category-title">
+          <span class="menu__cn" aria-hidden="true">主菜</span>
+          <span>Main Courses</span>
+        </h3>
         <div class="menu__grid">
           <article class="dish">
             <div class="dish__media">
               <img
-                src="https://images.unsplash.com/photo-1432139509613-5c4255815697?w=800&q=80&auto=format&fit=crop"
-                alt="Coq au vin — chicken braised in red wine with mushrooms"
+                src="https://images.unsplash.com/photo-1525755662778-989d0524087e?w=800&q=80&auto=format&fit=crop"
+                alt="Sliced Peking roast duck with crisp lacquered skin"
                 loading="lazy"
               />
             </div>
             <div class="dish__body">
               <div class="dish__heading">
-                <h4 class="dish__name">Coq au Vin</h4>
-                <span class="dish__price">S$46</span>
+                <h4 class="dish__name">Peking Duck · 北京烤鸭</h4>
+                <span class="dish__price">S$98</span>
               </div>
-              <p class="dish__desc">Chicken slow-braised in red wine, lardons, pearl onions.</p>
+              <p class="dish__desc">Cherry-wood roasted, hand-carved tableside, mandarin pancakes.</p>
             </div>
           </article>
 
           <article class="dish">
             <div class="dish__media">
               <img
-                src="https://images.unsplash.com/photo-1664741662725-bd131742b7b7?w=800&q=80&auto=format&fit=crop"
-                alt="Bœuf bourguignon — beef stew in rich red wine sauce"
+                src="https://images.unsplash.com/photo-1552611052-33e04de081de?w=800&q=80&auto=format&fit=crop"
+                alt="Whole steamed fish in soy-ginger sauce with scallions"
                 loading="lazy"
               />
             </div>
             <div class="dish__body">
               <div class="dish__heading">
-                <h4 class="dish__name">Bœuf Bourguignon</h4>
-                <span class="dish__price">S$52</span>
+                <h4 class="dish__name">Steamed Garoupa · 清蒸石斑</h4>
+                <span class="dish__price">S$86</span>
               </div>
-              <p class="dish__desc">Burgundy beef stew, root vegetables, buttered potato.</p>
+              <p class="dish__desc">Whole reef garoupa, premium light soy, ginger, spring onion oil.</p>
             </div>
           </article>
 
           <article class="dish">
             <div class="dish__media">
               <img
-                src="https://images.unsplash.com/photo-1661081090172-f91124f63c51?w=800&q=80&auto=format&fit=crop"
-                alt="Sole meunière — pan-fried sole fillet with lemon butter"
+                src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=800&q=80&auto=format&fit=crop"
+                alt="Bowl of hand-pulled noodles in clear broth"
                 loading="lazy"
               />
             </div>
             <div class="dish__body">
               <div class="dish__heading">
-                <h4 class="dish__name">Sole Meunière</h4>
-                <span class="dish__price">S$58</span>
+                <h4 class="dish__name">Abalone La Mian · 鲍鱼拉面</h4>
+                <span class="dish__price">S$68</span>
               </div>
-              <p class="dish__desc">Dover sole in browned butter, lemon, capers, parsley.</p>
+              <p class="dish__desc">Hand-pulled noodles, two-head abalone, twelve-hour superior stock.</p>
             </div>
           </article>
         </div>
@@ -188,56 +199,59 @@
 
       <!-- Desserts -->
       <div class="menu__category">
-        <h3 class="menu__category-title">Desserts</h3>
+        <h3 class="menu__category-title">
+          <span class="menu__cn" aria-hidden="true">甜品</span>
+          <span>Desserts &amp; Tea</span>
+        </h3>
         <div class="menu__grid">
           <article class="dish">
             <div class="dish__media">
               <img
-                src="https://images.unsplash.com/photo-1554371650-1f19f803c220?w=800&q=80&auto=format&fit=crop"
-                alt="Crème brûlée with a caramelised sugar crust"
+                src="https://images.unsplash.com/photo-1606471191009-63994c53433b?w=800&q=80&auto=format&fit=crop"
+                alt="Warm sweet soup with lotus seeds in a porcelain bowl"
                 loading="lazy"
               />
             </div>
             <div class="dish__body">
               <div class="dish__heading">
-                <h4 class="dish__name">Crème Brûlée</h4>
+                <h4 class="dish__name">Lotus &amp; Red Date · 莲子红枣</h4>
                 <span class="dish__price">S$18</span>
               </div>
-              <p class="dish__desc">Vanilla bean custard, torched caramel crust.</p>
+              <p class="dish__desc">Double-boiled lotus seed, red date, dried longan, rock sugar.</p>
             </div>
           </article>
 
           <article class="dish">
             <div class="dish__media">
               <img
-                src="https://images.unsplash.com/photo-1616953882462-8a583e0afbb4?w=800&q=80&auto=format&fit=crop"
-                alt="Tarte Tatin — upside-down caramelised apple tart"
+                src="https://images.unsplash.com/photo-1623595119708-26b1f7500ddd?w=800&q=80&auto=format&fit=crop"
+                alt="Mango pomelo sago dessert in a glass bowl"
                 loading="lazy"
               />
             </div>
             <div class="dish__body">
               <div class="dish__heading">
-                <h4 class="dish__name">Tarte Tatin</h4>
-                <span class="dish__price">S$20</span>
-              </div>
-              <p class="dish__desc">Upside-down caramelised apple tart, crème fraîche.</p>
-            </div>
-          </article>
-
-          <article class="dish">
-            <div class="dish__media">
-              <img
-                src="https://images.unsplash.com/photo-1590080875852-ba44f83ff2db?w=800&q=80&auto=format&fit=crop"
-                alt="Chocolate mousse in a glass garnished with cocoa"
-                loading="lazy"
-              />
-            </div>
-            <div class="dish__body">
-              <div class="dish__heading">
-                <h4 class="dish__name">Mousse au Chocolat</h4>
+                <h4 class="dish__name">Yang Zhi Gan Lu · 杨枝甘露</h4>
                 <span class="dish__price">S$19</span>
               </div>
-              <p class="dish__desc">Dark Valrhona chocolate mousse, sea salt, cocoa nib.</p>
+              <p class="dish__desc">Chilled Alphonso mango, pomelo pearl, coconut, sago.</p>
+            </div>
+          </article>
+
+          <article class="dish">
+            <div class="dish__media">
+              <img
+                src="https://images.unsplash.com/photo-1546039907-7fa05f864c02?w=800&q=80&auto=format&fit=crop"
+                alt="A gongfu tea service with porcelain cups and a small teapot"
+                loading="lazy"
+              />
+            </div>
+            <div class="dish__body">
+              <div class="dish__heading">
+                <h4 class="dish__name">Aged Pu-erh · 陈年普洱</h4>
+                <span class="dish__price">S$26</span>
+              </div>
+              <p class="dish__desc">2007 Menghai vintage, gongfu service, three porcelain steepings.</p>
             </div>
           </article>
         </div>
@@ -247,36 +261,36 @@
     <!-- ============================= TESTIMONIALS ============================= -->
     <section id="testimonials" class="section testimonials fade-in">
       <div class="section__head">
-        <p class="eyebrow">Guest Experiences</p>
+        <p class="eyebrow">客人留言 · Guest Voices</p>
         <h2 class="section__title">What Our Guests Say</h2>
       </div>
 
       <div class="testimonials__grid">
         <figure class="testimonial">
-          <div class="testimonial__stars" aria-label="Rated 5 out of 5 stars">★★★★★</div>
+          <div class="testimonial__seal" aria-hidden="true">福</div>
           <blockquote class="testimonial__quote">
-            “A flawless evening from the first amuse-bouche to the last spoonful
-            of crème brûlée. Paris on a plate.”
+            “The Peking duck carved before us with theatrical precision — every
+            slice a quiet ceremony. The most considered meal I've had this year.”
           </blockquote>
-          <figcaption class="testimonial__author">— Élodie Bernard</figcaption>
+          <figcaption class="testimonial__author">— Mei-Ling Chan, Hong Kong</figcaption>
         </figure>
 
         <figure class="testimonial">
-          <div class="testimonial__stars" aria-label="Rated 5 out of 5 stars">★★★★★</div>
+          <div class="testimonial__seal" aria-hidden="true">寿</div>
           <blockquote class="testimonial__quote">
-            “The bœuf bourguignon was extraordinary and the service impeccably
-            warm. Our new anniversary tradition.”
+            “We came for the abalone la mian and stayed for the room itself —
+            lantern light, lacquered wood, perfectly measured stillness.”
           </blockquote>
-          <figcaption class="testimonial__author">— James Whitfield</figcaption>
+          <figcaption class="testimonial__author">— David Whitfield, London</figcaption>
         </figure>
 
         <figure class="testimonial">
-          <div class="testimonial__stars" aria-label="Rated 5 out of 5 stars">★★★★★</div>
+          <div class="testimonial__seal" aria-hidden="true">禧</div>
           <blockquote class="testimonial__quote">
-            “Elegant, intimate, and utterly delicious. Maison Lumière sets the
-            standard for fine French dining.”
+            “Dragon Gate respects the old recipes without being held by them.
+            The yang zhi gan lu alone is worth the journey.”
           </blockquote>
-          <figcaption class="testimonial__author">— Priya Nair</figcaption>
+          <figcaption class="testimonial__author">— Priya Nair, Mumbai</figcaption>
         </figure>
       </div>
     </section>
@@ -284,11 +298,11 @@
     <!-- ============================= RESERVATIONS ============================= -->
     <section id="reservations" class="section reservations fade-in">
       <div class="section__head">
-        <p class="eyebrow">Book Your Visit</p>
+        <p class="eyebrow">预订 · Book Your Visit</p>
         <h2 class="section__title">Reserve a Table</h2>
         <p class="section__intro">
-          We look forward to welcoming you. Tell us a little about your visit
-          and we'll confirm your reservation shortly.
+          Our private dining rooms and chef's counter book quickly. Share a few
+          details and our maître d' will confirm your table within the day.
         </p>
       </div>
 
@@ -352,12 +366,12 @@
             <textarea id="requests" name="requests" rows="4" placeholder="Allergies, seating preferences, celebrations…"></textarea>
           </div>
 
-          <button type="submit" class="btn btn--gold btn--full">Request Reservation</button>
+          <button type="submit" class="btn btn--red btn--full">Request Reservation</button>
         </form>
 
         <!-- Success confirmation (revealed by script.js) -->
         <div class="confirmation" id="confirmation" hidden role="status" aria-live="polite">
-          <div class="confirmation__mark">✓</div>
+          <div class="confirmation__mark" aria-hidden="true">谢</div>
           <h3 class="confirmation__title">Reservation Received</h3>
           <p class="confirmation__text" id="confirmationText"></p>
           <button type="button" class="btn btn--outline" id="newReservation">
@@ -372,34 +386,38 @@
   <footer class="footer">
     <div class="footer__grid">
       <div class="footer__col">
-        <h4 class="footer__brand">Maison Lumière</h4>
-        <p>12 Rue des Lumières<br />049 145 Singapore</p>
+        <h4 class="footer__brand">
+          <span>Dragon Gate</span>
+          <span class="footer__brand-cn" aria-hidden="true">龙门</span>
+        </h4>
+        <p>8 Bukit Pasoh Road<br />089 814 Singapore</p>
       </div>
       <div class="footer__col">
         <h5 class="footer__heading">Contact</h5>
         <p>
-          <a href="tel:+6561234567">+65 6123 4567</a><br />
-          <a href="mailto:bonjour@maisonlumiere.sg">bonjour@maisonlumiere.sg</a>
+          <a href="tel:+6562288888">+65 6228 8888</a><br />
+          <a href="mailto:reserve@dragongate.sg">reserve@dragongate.sg</a>
         </p>
       </div>
       <div class="footer__col">
         <h5 class="footer__heading">Opening Hours</h5>
         <p>
           Tuesday – Sunday<br />
-          5:30 PM – 11:00 PM<br />
+          Lunch 11:30 – 14:30<br />
+          Dinner 18:00 – 22:30<br />
           Closed Mondays
         </p>
       </div>
       <div class="footer__col">
         <h5 class="footer__heading">Follow</h5>
         <ul class="footer__social">
-          <li><a href="#" aria-label="Maison Lumière on Instagram">Instagram</a></li>
-          <li><a href="#" aria-label="Maison Lumière on Facebook">Facebook</a></li>
-          <li><a href="#" aria-label="Maison Lumière on X">X / Twitter</a></li>
+          <li><a href="#" aria-label="Dragon Gate on Instagram">Instagram</a></li>
+          <li><a href="#" aria-label="Dragon Gate on WeChat">WeChat</a></li>
+          <li><a href="#" aria-label="Dragon Gate on Xiaohongshu">小红书</a></li>
         </ul>
       </div>
     </div>
-    <p class="footer__copy">© 2026 Maison Lumière. All rights reserved.</p>
+    <p class="footer__copy">© 2026 Dragon Gate · 龙门. All rights reserved.</p>
   </footer>
 
   <script src="script.js"></script>

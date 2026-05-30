@@ -1,14 +1,16 @@
-# Maison Lumière
+# Dragon Gate · 龙门
 
-A single-page marketing and reservation website for a fictional upscale French restaurant, **Maison Lumière**. Built as a pure static front-end — **vanilla HTML, CSS, and JavaScript only**, with no frameworks, build step, or dependencies.
+A single-page marketing and reservation website for a fictional Michelin-tier modern Cantonese restaurant, **Dragon Gate · 龙门**. Built as a pure static front-end — **vanilla HTML, CSS, and JavaScript only**, with no frameworks, build step, or dependencies.
 
 🔗 **Live site:** https://alfredang.github.io/restaurantbooking/
 
-![Maison Lumière screenshot](screenshot.png)
+![Dragon Gate screenshot](screenshot.png)
 
 ## Features
 
-- **Responsive single-page layout** — hero, menu, testimonials, reservation form, and footer.
+- **Responsive single-page layout** — hero, menu (Dim Sum / Mains / Desserts & Tea), testimonials, reservation form, and footer.
+- **Bilingual brand & typography** — English display serif (Cormorant Garamond) paired with Noto Serif SC for first-class Hanzi rendering.
+- **Lacquer-red + gold design system** — imperial palette with hairline gold rules and a seal/chop motif.
 - **Client-side reservation form** with per-field validation and an inline confirmation message (no backend).
 - **Fade-in-on-scroll** animations via `IntersectionObserver`, with a graceful fallback.
 - **Mobile navigation** with an accessible toggle (`aria-expanded`).
@@ -28,7 +30,8 @@ A single-page marketing and reservation website for a fictional upscale French r
 There is nothing to build or compile. Either:
 
 - Open `index.html` directly in a browser, or
-- On Windows: `Start-Process index.html`
+- On Windows: `Start-Process index.html`, or
+- Serve over HTTP: `python -m http.server 8000` and visit http://localhost:8000
 
 A network connection is needed for Google Fonts and Unsplash dish photos to load.
 
@@ -43,4 +46,4 @@ triggered manually from the **Actions** tab (workflow_dispatch).
 - HTML5
 - CSS3 (custom properties, BEM-style class naming)
 - Vanilla JavaScript (ES, no dependencies)
-- Google Fonts + Unsplash images (remote assets)
+- Google Fonts (Cormorant Garamond + Noto Serif SC + Inter) + Unsplash images

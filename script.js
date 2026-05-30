@@ -1,5 +1,5 @@
 /* =====================================================================
-   Maison Lumière — script.js
+   Dragon Gate · 龙门 — script.js
    - Mobile navigation toggle
    - Fade-in-on-scroll via IntersectionObserver
    - Client-side reservation form validation + confirmation
@@ -157,9 +157,9 @@
       const guestWord = guests === 1 ? "guest" : "guests";
 
       confirmationText.textContent =
-        "Thank you, " + name + "! Your reservation request for " +
+        "Thank you, " + name + ". Your table at Dragon Gate for " +
         guests + " " + guestWord + " on " + dateStr + " at " + timeStr +
-        " has been received. We will confirm by email shortly.";
+        " has been received. Our maître d' will confirm by email shortly.";
 
       form.reset();
       form.hidden = true;
