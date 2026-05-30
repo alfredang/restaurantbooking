@@ -16,7 +16,7 @@ A single-page marketing and reservation website for a fictional Michelin-tier mo
 - **Mobile navigation** with an accessible toggle (`aria-expanded`).
 - **Accessibility first** — descriptive `alt` text, labelled inputs, `role="alert"` errors.
 - **Reduced-motion support** — animations and smooth scroll are disabled for users who prefer reduced motion.
-- **Floating WhatsApp chat button** — fixed bottom-right action button that opens a prefilled WhatsApp reservation message.
+- **Floating concierge chatbot** — fixed bottom-right bubble that opens a chat panel. Answers guest questions via **RAG** over `FAQ.md`, served by a local FastAPI + ChromaDB backend with HuggingFace embeddings.
 - **Contact / lead section** with embedded Google Map showing the restaurant location.
 
 ## Project structure
@@ -25,7 +25,9 @@ A single-page marketing and reservation website for a fictional Michelin-tier mo
 |------|----------------|
 | `index.html` | All content and section markup (`#hero`, `#menu`, `#testimonials`, `#reservations`, footer). |
 | `styles.css` | All styling. Design tokens (palette, fonts, spacing) live in CSS custom properties under `:root`. |
-| `script.js` | All behavior — one IIFE with init modules: mobile nav, scroll fade-in, date constraint, reservation form. |
+| `script.js` | All behavior — one IIFE with init modules: mobile nav, scroll fade-in, date constraint, reservation form, lead form, theme toggle, chatbot widget. |
+| `FAQ.md` | Source knowledge base for the concierge chatbot (Q&A grouped by section). |
+| `backend/` | Python RAG backend — `ingest_faq.py` (FAQ → ChromaDB), `server.py` (FastAPI `/query`), `requirements.txt`. |
 
 ## Running locally
 
@@ -36,6 +38,24 @@ There is nothing to build or compile. Either:
 - Serve over HTTP: `python -m http.server 8000` and visit http://localhost:8000
 
 A network connection is needed for Google Fonts and Unsplash dish photos to load.
+
+### Running the chatbot backend (optional)
+
+The concierge chatbot calls a local FastAPI server. Without it the bubble still opens but queries will fail.
+
+```bash
+cd backend
+pip install -r requirements.txt
+
+# Add your HuggingFace token to .env at the project root:
+#   HF_API_KEY=hf_xxxxxxxxxxxxxxxxxxxx
+# Get one (Read scope) at https://huggingface.co/settings/tokens
+
+python ingest_faq.py             # parses FAQ.md → ChromaDB at ./chroma_store/
+uvicorn server:app --port 8000   # API at http://127.0.0.1:8000 (landing + /docs)
+```
+
+The frontend hits `http://127.0.0.1:8000/query` by default. Override by setting `window.CHATBOT_API_URL` before `script.js` loads.
 
 ## Deployment
 
@@ -49,3 +69,4 @@ triggered manually from the **Actions** tab (workflow_dispatch).
 - CSS3 (custom properties, BEM-style class naming)
 - Vanilla JavaScript (ES, no dependencies)
 - Google Fonts (Cormorant Garamond + Noto Serif SC + Inter) + Unsplash images
+- **Chatbot backend (optional):** Python · FastAPI · ChromaDB · HuggingFace Inference API (`sentence-transformers/all-MiniLM-L6-v2`)
