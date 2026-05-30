@@ -1,0 +1,27 @@
+# Backup / test / scratch files — not part of the site
+*.backup
+*_backup.html
+*_backup.css
+*_backup_*.html
+*_old.html
+*_old_backup.html
+*_buggy.html
+*_test.html
+*_clean.html
+*_minimal.html
+*_modern.html
+*_modern_backup.html
+*_modern_clean.html
+*_no_animations.html
+*_redesign.html
+*_v2.html
+*_design_pranks.html
+*_pranks_test.html
+*_design_showcase.html
+*_with_modern_design.html
+styles_test.html
+styles_backup.css
+styles_modern.css
+there.css
+diff_output.txt
+CHANGES_SUMMARY.md

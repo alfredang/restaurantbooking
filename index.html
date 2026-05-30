@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maison Lumière — Authentic French Cuisine</title>
+  <meta
+    name="description"
+    content="Maison Lumière — an upscale French restaurant offering authentic Parisian cuisine. Reserve your table today."
+  />
+
+  <!-- Google Fonts: Playfair Display (serif headings) + Montserrat (sans body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- ============================= NAVIGATION ============================= -->
+  <header class="site-header" id="top">
+    <nav class="nav" aria-label="Primary">
+      <a class="nav__brand" href="#top">
+        Maison&nbsp;Lumière
+      </a>
+
+      <!-- Mobile menu toggle -->
+      <button
+        class="nav__toggle"
+        id="navToggle"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="navLinks"
+      >
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav__links" id="navLinks">
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#reservations">Reservations</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============================= HERO ============================= -->
+    <section id="hero" class="hero" aria-label="Welcome">
+      <div class="hero__overlay"></div>
+      <div class="hero__content">
+        <p class="eyebrow eyebrow--light">Est. 1908 · Paris</p>
+        <h1 class="hero__title">Maison Lumière</h1>
+        <p class="hero__tagline">
+          Authentic French cuisine in the heart of the city.
+        </p>
+        <a href="#reservations" class="btn btn--gold">Reserve a Table</a>
+      </div>
+      <a href="#menu" class="hero__scroll" aria-label="Scroll to menu">&#8595;</a>
+    </section>
+
+    <!-- ============================= MENU ============================= -->
+    <section id="menu" class="section menu fade-in">
+      <div class="section__head">
+        <p class="eyebrow">La Carte</p>
+        <h2 class="section__title">Our Menu</h2>
+        <p class="section__intro">
+          A seasonal celebration of classic French gastronomy, crafted each
+          morning from the market's finest produce.
+        </p>
+      </div>
+
+      <!-- Entrées -->
+      <div class="menu__category">
+        <h3 class="menu__category-title">Entrées</h3>
+        <div class="menu__grid">
+          <article class="dish">
+            <div class="dish__media">
+              <img
+                src="https://images.unsplash.com/photo-1585684278140-f6b0e42a9bc0?w=800&q=80&auto=format&fit=crop"
+                alt="Escargots de Bourgogne served in their shells with herb butter"
+                loading="lazy"
+              />
+            </div>
+            <div class="dish__body">
+              <div class="dish__heading">
+                <h4 class="dish__name">Escargots de Bourgogne</h4>
+                <span class="dish__price">S$28</span>
+              </div>
+              <p class="dish__desc">Burgundy snails baked in garlic-parsley butter.</p>
+            </div>
+          </article>
+
+          <article class="dish">
+            <div class="dish__media">
+              <img
+                src="https://images.unsplash.com/photo-1694345598676-218d3202f8d3?w=800&q=80&auto=format&fit=crop"
+                alt="A bowl of French onion soup topped with melted gruyère"
+                loading="lazy"
+              />
+            </div>
+            <div class="dish__body">
+              <div class="dish__heading">
+                <h4 class="dish__name">Soupe à l'Oignon</h4>
+                <span class="dish__price">S$24</span>
+              </div>
+              <p class="dish__desc">Caramelised onion soup, gruyère, toasted baguette.</p>
+            </div>
+          </article>
+
+          <article class="dish">
+            <div class="dish__media">
+              <img
+                src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80&auto=format&fit=crop"
+                alt="A fresh Niçoise salad with greens, tomatoes and olives"
+                loading="lazy"
+              />
+            </div>
+            <div class="dish__body">
+              <div class="dish__heading">
+                <h4 class="dish__name">Salade Niçoise</h4>
+                <span class="dish__price">S$26</span>
+              </div>
+              <p class="dish__desc">Seared tuna, haricots verts, egg, olives, anchovy.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Plats Principaux -->
+      <div class="menu__category">
+        <h3 class="menu__category-title">Plats Principaux</h3>
+        <div class="menu__grid">
+          <article class="dish">
+            <div class="dish__media">
+              <img
+                src="https://images.unsplash.com/photo-1432139509613-5c4255815697?w=800&q=80&auto=format&fit=crop"
+                alt="Coq au vin — chicken braised in red wine with mushrooms"
+                loading="lazy"
+              />
+            </div>
+            <div class="dish__body">
+              <div class="dish__heading">
+                <h4 class="dish__name">Coq au Vin</h4>
+                <span class="dish__price">S$46</span>
+              </div>
+              <p class="dish__desc">Chicken slow-braised in red wine, lardons, pearl onions.</p>
+            </div>
+          </article>
+
+          <article class="dish">
+            <div class="dish__media">
+              <img
+                src="https://images.unsplash.com/photo-1664741662725-bd131742b7b7?w=800&q=80&auto=format&fit=crop"
+                alt="Bœuf bourguignon — beef stew in rich red wine sauce"
+                loading="lazy"
+              />
+            </div>
+            <div class="dish__body">
+              <div class="dish__heading">
+                <h4 class="dish__name">Bœuf Bourguignon</h4>
+                <span class="dish__price">S$52</span>
+              </div>
+              <p class="dish__desc">Burgundy beef stew, root vegetables, buttered potato.</p>
+            </div>
+          </article>
+
+          <article class="dish">
+            <div class="dish__media">
+              <img
+                src="https://images.unsplash.com/photo-1661081090172-f91124f63c51?w=800&q=80&auto=format&fit=crop"
+                alt="Sole meunière — pan-fried sole fillet with lemon butter"
+                loading="lazy"
+              />
+            </div>
+            <div class="dish__body">
+              <div class="dish__heading">
+                <h4 class="dish__name">Sole Meunière</h4>
+                <span class="dish__price">S$58</span>
+              </div>
+              <p class="dish__desc">Dover sole in browned butter, lemon, capers, parsley.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Desserts -->
+      <div class="menu__category">
+        <h3 class="menu__category-title">Desserts</h3>
+        <div class="menu__grid">
+          <article class="dish">
+            <div class="dish__media">
+              <img
+                src="https://images.unsplash.com/photo-1554371650-1f19f803c220?w=800&q=80&auto=format&fit=crop"
+                alt="Crème brûlée with a caramelised sugar crust"
+                loading="lazy"
+              />
+            </div>
+            <div class="dish__body">
+              <div class="dish__heading">
+                <h4 class="dish__name">Crème Brûlée</h4>
+                <span class="dish__price">S$18</span>
+              </div>
+              <p class="dish__desc">Vanilla bean custard, torched caramel crust.</p>
+            </div>
+          </article>
+
+          <article class="dish">
+            <div class="dish__media">
+              <img
+                src="https://images.unsplash.com/photo-1616953882462-8a583e0afbb4?w=800&q=80&auto=format&fit=crop"
+                alt="Tarte Tatin — upside-down caramelised apple tart"
+                loading="lazy"
+              />
+            </div>
+            <div class="dish__body">
+              <div class="dish__heading">
+                <h4 class="dish__name">Tarte Tatin</h4>
+                <span class="dish__price">S$20</span>
+              </div>
+              <p class="dish__desc">Upside-down caramelised apple tart, crème fraîche.</p>
+            </div>
+          </article>
+
+          <article class="dish">
+            <div class="dish__media">
+              <img
+                src="https://images.unsplash.com/photo-1590080875852-ba44f83ff2db?w=800&q=80&auto=format&fit=crop"
+                alt="Chocolate mousse in a glass garnished with cocoa"
+                loading="lazy"
+              />
+            </div>
+            <div class="dish__body">
+              <div class="dish__heading">
+                <h4 class="dish__name">Mousse au Chocolat</h4>
+                <span class="dish__price">S$19</span>
+              </div>
+              <p class="dish__desc">Dark Valrhona chocolate mousse, sea salt, cocoa nib.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= TESTIMONIALS ============================= -->
+    <section id="testimonials" class="section testimonials fade-in">
+      <div class="section__head">
+        <p class="eyebrow">Guest Experiences</p>
+        <h2 class="section__title">What Our Guests Say</h2>
+      </div>
+
+      <div class="testimonials__grid">
+        <figure class="testimonial">
+          <div class="testimonial__stars" aria-label="Rated 5 out of 5 stars">★★★★★</div>
+          <blockquote class="testimonial__quote">
+            “A flawless evening from the first amuse-bouche to the last spoonful
+            of crème brûlée. Paris on a plate.”
+          </blockquote>
+          <figcaption class="testimonial__author">— Élodie Bernard</figcaption>
+        </figure>
+
+        <figure class="testimonial">
+          <div class="testimonial__stars" aria-label="Rated 5 out of 5 stars">★★★★★</div>
+          <blockquote class="testimonial__quote">
+            “The bœuf bourguignon was extraordinary and the service impeccably
+            warm. Our new anniversary tradition.”
+          </blockquote>
+          <figcaption class="testimonial__author">— James Whitfield</figcaption>
+        </figure>
+
+        <figure class="testimonial">
+          <div class="testimonial__stars" aria-label="Rated 5 out of 5 stars">★★★★★</div>
+          <blockquote class="testimonial__quote">
+            “Elegant, intimate, and utterly delicious. Maison Lumière sets the
+            standard for fine French dining.”
+          </blockquote>
+          <figcaption class="testimonial__author">— Priya Nair</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============================= RESERVATIONS ============================= -->
+    <section id="reservations" class="section reservations fade-in">
+      <div class="section__head">
+        <p class="eyebrow">Book Your Visit</p>
+        <h2 class="section__title">Reserve a Table</h2>
+        <p class="section__intro">
+          We look forward to welcoming you. Tell us a little about your visit
+          and we'll confirm your reservation shortly.
+        </p>
+      </div>
+
+      <div class="reservations__panel">
+        <!-- Reservation form (handled entirely client-side in script.js) -->
+        <form id="reservationForm" class="form" novalidate>
+          <div class="form__row">
+            <div class="form__field">
+              <label for="name">Full Name <span class="req">*</span></label>
+              <input type="text" id="name" name="name" autocomplete="name" required />
+              <span class="form__error" id="error-name" role="alert"></span>
+            </div>
+
+            <div class="form__field">
+              <label for="email">Email <span class="req">*</span></label>
+              <input type="email" id="email" name="email" autocomplete="email" required />
+              <span class="form__error" id="error-email" role="alert"></span>
+            </div>
+          </div>
+
+          <div class="form__row">
+            <div class="form__field">
+              <label for="phone">Phone <span class="req">*</span></label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel" required />
+              <span class="form__error" id="error-phone" role="alert"></span>
+            </div>
+
+            <div class="form__field">
+              <label for="guests">Number of Guests <span class="req">*</span></label>
+              <input type="number" id="guests" name="guests" min="1" max="20" value="2" required />
+              <span class="form__error" id="error-guests" role="alert"></span>
+            </div>
+          </div>
+
+          <div class="form__row">
+            <div class="form__field">
+              <label for="date">Date <span class="req">*</span></label>
+              <input type="date" id="date" name="date" required />
+              <span class="form__error" id="error-date" role="alert"></span>
+            </div>
+
+            <div class="form__field">
+              <label for="time">Time <span class="req">*</span></label>
+              <select id="time" name="time" required>
+                <option value="">Select a time</option>
+                <option value="17:30">5:30 PM</option>
+                <option value="18:00">6:00 PM</option>
+                <option value="18:30">6:30 PM</option>
+                <option value="19:00">7:00 PM</option>
+                <option value="19:30">7:30 PM</option>
+                <option value="20:00">8:00 PM</option>
+                <option value="20:30">8:30 PM</option>
+                <option value="21:00">9:00 PM</option>
+              </select>
+              <span class="form__error" id="error-time" role="alert"></span>
+            </div>
+          </div>
+
+          <div class="form__field">
+            <label for="requests">Special Requests <span class="optional">(optional)</span></label>
+            <textarea id="requests" name="requests" rows="4" placeholder="Allergies, seating preferences, celebrations…"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn--gold btn--full">Request Reservation</button>
+        </form>
+
+        <!-- Success confirmation (revealed by script.js) -->
+        <div class="confirmation" id="confirmation" hidden role="status" aria-live="polite">
+          <div class="confirmation__mark">✓</div>
+          <h3 class="confirmation__title">Reservation Received</h3>
+          <p class="confirmation__text" id="confirmationText"></p>
+          <button type="button" class="btn btn--outline" id="newReservation">
+            Make Another Reservation
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================= FOOTER ============================= -->
+  <footer class="footer">
+    <div class="footer__grid">
+      <div class="footer__col">
+        <h4 class="footer__brand">Maison Lumière</h4>
+        <p>12 Rue des Lumières<br />049 145 Singapore</p>
+      </div>
+      <div class="footer__col">
+        <h5 class="footer__heading">Contact</h5>
+        <p>
+          <a href="tel:+6561234567">+65 6123 4567</a><br />
+          <a href="mailto:bonjour@maisonlumiere.sg">bonjour@maisonlumiere.sg</a>
+        </p>
+      </div>
+      <div class="footer__col">
+        <h5 class="footer__heading">Opening Hours</h5>
+        <p>
+          Tuesday – Sunday<br />
+          5:30 PM – 11:00 PM<br />
+          Closed Mondays
+        </p>
+      </div>
+      <div class="footer__col">
+        <h5 class="footer__heading">Follow</h5>
+        <ul class="footer__social">
+          <li><a href="#" aria-label="Maison Lumière on Instagram">Instagram</a></li>
+          <li><a href="#" aria-label="Maison Lumière on Facebook">Facebook</a></li>
+          <li><a href="#" aria-label="Maison Lumière on X">X / Twitter</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer__copy">© 2026 Maison Lumière. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
