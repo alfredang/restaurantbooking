@@ -4,6 +4,8 @@ A single-page marketing and reservation website for a fictional upscale French r
 
 🔗 **Live site:** https://alfredang.github.io/restaurantbooking/
 
+![Maison Lumière screenshot](screenshot.png)
+
 ## Features
 
 - **Responsive single-page layout** — hero, menu, testimonials, reservation form, and footer.
