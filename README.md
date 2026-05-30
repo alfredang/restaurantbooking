@@ -8,7 +8,7 @@ A single-page marketing and reservation website for a fictional Michelin-tier mo
 
 ## Features
 
-- **Responsive single-page layout** — hero, menu (Dim Sum / Mains / Desserts & Tea), testimonials, reservation form, and footer.
+- **Responsive single-page layout** — hero, menu (Dim Sum / Mains / Desserts & Tea), testimonials, reservation form, contact/lead section, and footer.
 - **Bilingual brand & typography** — English display serif (Cormorant Garamond) paired with Noto Serif SC for first-class Hanzi rendering.
 - **Lacquer-red + gold design system** — imperial palette with hairline gold rules and a seal/chop motif.
 - **Client-side reservation form** with per-field validation and an inline confirmation message (no backend).
@@ -16,6 +16,8 @@ A single-page marketing and reservation website for a fictional Michelin-tier mo
 - **Mobile navigation** with an accessible toggle (`aria-expanded`).
 - **Accessibility first** — descriptive `alt` text, labelled inputs, `role="alert"` errors.
 - **Reduced-motion support** — animations and smooth scroll are disabled for users who prefer reduced motion.
+- **Floating WhatsApp chat button** — fixed bottom-right action button that opens a prefilled WhatsApp reservation message.
+- **Contact / lead section** with embedded Google Map showing the restaurant location.
 
 ## Project structure
 
